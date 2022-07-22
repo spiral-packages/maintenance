@@ -25,10 +25,10 @@ final class DriverManager
         $driver = $this->config->getDefaultDriver();
 
         if (! isset($this->drivers[$driver])) {
-            throw new DriverNotFoundException(\sprintf('Driver [%s] is not found.', $driver));
+            return $this->drivers[$driver] = $this->resolve($driver);
         }
 
-        return $this->drivers[$driver] = $this->resolve($driver);
+        return $this->drivers[$driver];
     }
 
     private function resolve(string $driver): DriverInterface

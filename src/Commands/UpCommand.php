@@ -9,7 +9,7 @@ use Spiral\Maintenance\MaintenanceMode;
 
 class UpCommand extends Command
 {
-    protected const SIGNATURE = 'maintenance:up';
+    protected const SIGNATURE = 'up';
     protected const DESCRIPTION = 'Bring the application out of maintenance mode';
 
     public function perform(MaintenanceMode $maintenance): int

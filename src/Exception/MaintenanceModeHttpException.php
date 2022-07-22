@@ -9,13 +9,9 @@ use Spiral\Maintenance\Payload;
 
 class MaintenanceModeHttpException extends ClientException
 {
-    public readonly Payload $payload;
-
-    public function withPayload(Payload $payload): self
-    {
-        $self = clone $this;
-        $self->payload = $payload;
-
-        return $self;
+    public function __construct(
+        public readonly Payload $payload
+    ) {
+        parent::__construct($payload->responseStatus, 'Service Unavailable');
     }
 }

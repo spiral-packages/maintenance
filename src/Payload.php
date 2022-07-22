@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Spiral\Maintenance;
 
-final class Payload implements \JsonSerializable
+final class Payload
 {
     public function __construct(
-        public readonly \DateTimeInterface $retryAt,
+        public readonly ?\DateTimeInterface $retryAt = null,
         public readonly int $responseStatus = 503
     ) {
-    }
-
-    public function jsonSerialize(): array
-    {
-        return [
-            'retryAt' => $this->retryAt->getTimestamp(),
-            'responseStatus' => $this->responseStatus,
-        ];
     }
 }

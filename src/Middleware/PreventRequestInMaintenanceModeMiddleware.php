@@ -26,11 +26,6 @@ class PreventRequestInMaintenanceModeMiddleware implements MiddlewareInterface
 
         $payload = $this->maintenanceMode->getPayload();
 
-        $e = new MaintenanceModeHttpException(
-            $payload->responseStatus,
-            'Service Unavailable'
-        );
-
-        throw $e->withPayload($payload);
+        throw new MaintenanceModeHttpException($payload);
     }
 }

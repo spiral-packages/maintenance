@@ -58,12 +58,12 @@ class MaintenanceBootloader extends Bootloader
                 'default' => $env->get('MAINTENANCE_DRIVER', 'file'),
                 'drivers' => [
                     'file' => [
-                        'type' => FileDriver::class,
+                        'driver' => FileDriver::class,
                         'dir' => $dirs->get('runtime'),
                     ],
                     'cache' => [
-                        'type' => CacheDriver::class,
-                        'storage' => $env->get('MAINTENANCE_CACHE_STORAGE', 'default'),
+                        'driver' => CacheDriver::class,
+                        'storage' => $env->get('MAINTENANCE_CACHE_STORAGE'),
                         'key' => $env->get('MAINTENANCE_CACHE_KEY', 'maintenance'),
                     ],
                 ],

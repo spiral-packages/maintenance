@@ -34,6 +34,78 @@ protected const LOAD = [
 > Note: if you are using [`spiral-packages/discoverer`](https://github.com/spiral-packages/discoverer),
 > you don't need to register bootloader by yourself.
 
+## Configuration
+
+By default, the package uses `file` driver for storing information about maintenance mode. If you have multiple
+instances of your application you need to use `cache` driver with storage that will be accessed from all instances.
+
+```dotenv
+MAINTENANCE_DRIVER=cache
+MAINTENANCE_CACHE_STORAGE=null
+MAINTENANCE_CACHE_KEY=maintenance
+```
+
+## Usage
+
+Include `Spiral\Maintenance\Middleware\PreventRequestInMaintenanceModeMiddleware` in your application for routes that
+should not have access during maintenance mode.
+
+```php
+final class RoutesBootloader extends BaseRoutesBootloader
+{
+    protected function globalMiddleware(): array
+    {
+        return [
+            \Spiral\Maintenance\Middleware\PreventRequestInMaintenanceModeMiddleware::class,
+            // ...
+        ];
+    }
+}
+```
+
+To enable maintenance mode, execute the down command:
+
+```bash
+php app.php down
+```
+
+By default, response code for maintenance mode is `503`, but you may set custom response code
+
+```bash
+php app.php down --status=504
+```
+
+To disable maintenance mode, use the up command:
+
+```bash
+php app.php up
+```
+
+When your application is in maintenance mode the middleware
+throws `Spiral\Maintenance\Exception\MaintenanceModeHttpException` with defined status code. 
+
+Spiral Framework allows you to pre-render a maintenance mode view that will be returned to the very beginning of the 
+request cycle. You may pre-render a template of your choice using `App\ErrorHandler\ViewRenderer`. By default, it looks
+for a template in a folder `app/views/exception/{statusCode}.dark.php`
+
+You can create a new view file `app/views/exception/503.dark.php`:
+
+```php
+<extends:layout.base title="[[Maintenance mode]]"/>
+<use:element path="embed/links" as="homepage:links"/>
+
+<stack:push name="styles">
+    <link rel="stylesheet" href="/styles/welcome.css"/>
+</stack:push>
+
+<define:body>
+    <div class="wrapper">
+        <img src="/images/503.svg" alt="Error 503" width="300px"/>
+        <h2>{{ $exception->getMessage() ?? 'Maintenance mode' }}</h2>
+    </div>
+</define:body>
+```
+
 ## Testing
 
 ```bash

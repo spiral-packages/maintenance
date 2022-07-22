@@ -8,7 +8,7 @@ use Spiral\Maintenance\Driver\DriverInterface;
 
 final class MaintenanceMode
 {
-    private \DateTimeInterface $retryAt;
+    private ?\DateTimeInterface $retryAt = null;
     private int $responseStatus = 503;
 
     public function __construct(

@@ -1,29 +1,31 @@
 {
-  "name": "spiralpackages/maintenance",
-  "description": "This is my package maintenance",
+  "name": "spiral-packages/maintenance",
+  "description": "Disable your application while it is updating or when you are performing maintenance.",
   "keywords": [
-    "SpiralPackages",
+    "php",
+    "package",
+    "maintenance",
+    "maintenance-mode",
     "spiral",
-    "maintenance"
+    "spiral-framework"
   ],
   "homepage": "https://github.com/spiralpackages/maintenance",
   "license": "MIT",
   "authors": [
     {
       "name": "butschster",
-      "email": "butschster@gmail.com",
-      "role": "Developer"
+      "email": "butschster@gmail.com"
     }
   ],
   "require": {
     "php": "^8.1",
     "spiral/serializer": "^3.0",
     "spiral/core": "^3.0",
+    "spiral/cache": "^3.0",
     "spiral/boot": "^3.0",
     "spiral/console": "^3.0"
   },
   "require-dev": {
-    "mockery/mockery": "^1.5",
     "spiral/framework": "^3.0.x-dev",
     "phpunit/phpunit": "^9.5",
     "spiral/testing": "^2.0",

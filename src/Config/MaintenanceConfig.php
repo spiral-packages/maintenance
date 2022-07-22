@@ -29,13 +29,13 @@ final class MaintenanceConfig extends InjectableConfig
 
         $config = $this->config['drivers'][$driver];
 
-        if (! isset($config['type'])) {
+        if (! isset($config['driver'])) {
             throw new \InvalidArgumentException(
                 \sprintf('Driver type for `%s` is not defined.', $driver)
             );
         }
 
-        if (! \is_string($config['type'])) {
+        if (! \is_string($config['driver'])) {
             throw new \InvalidArgumentException(
                 \sprintf('Driver type value for `%s` must be a string', $driver)
             );

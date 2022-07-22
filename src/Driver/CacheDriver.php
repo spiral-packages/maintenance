@@ -8,7 +8,7 @@ use Psr\SimpleCache\CacheInterface;
 use Spiral\Cache\CacheStorageProviderInterface;
 use Spiral\Cache\Config\CacheConfig;
 use Spiral\Maintenance\Payload;
-use Spiral\Serializer\SerializerInterface;
+use Spiral\Maintenance\PayloadSerializer;
 
 final class CacheDriver implements DriverInterface
 {
@@ -16,7 +16,7 @@ final class CacheDriver implements DriverInterface
 
     public function __construct(
         private readonly CacheStorageProviderInterface $storageProvider,
-        private readonly SerializerInterface $serializer,
+        private readonly PayloadSerializer $serializer,
         CacheConfig $cacheConfig,
         private readonly string $key,
         ?string $storage = null
@@ -44,8 +44,7 @@ final class CacheDriver implements DriverInterface
         }
 
         return $this->serializer->unserialize(
-            $this->getCache()->get($this->key),
-            Payload::class
+            $this->getCache()->get($this->key)
         );
     }
 

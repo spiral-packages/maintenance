@@ -6,18 +6,18 @@ namespace Spiral\Maintenance\Driver;
 
 use Spiral\Files\FilesInterface;
 use Spiral\Maintenance\Payload;
-use Spiral\Serializer\SerializerInterface;
+use Spiral\Maintenance\PayloadSerializer;
 
 final class FileDriver implements DriverInterface
 {
     private readonly string $path;
 
     public function __construct(
-        private readonly SerializerInterface $serializer,
+        private readonly PayloadSerializer $serializer,
         private readonly FilesInterface $files,
         string $dir,
     ) {
-        $this->path = $dir.'/'.'maintenance.json';
+        $this->path = $dir.'/'.'maintenance';
     }
 
     public function activate(Payload $payload): void
@@ -41,8 +41,7 @@ final class FileDriver implements DriverInterface
         }
 
         return $this->serializer->unserialize(
-            $this->files->read($this->path),
-            Payload::class
+            $this->files->read($this->path)
         );
     }
 }
