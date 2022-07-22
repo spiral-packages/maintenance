@@ -1,40 +1,43 @@
 {
-  "name": ":vendor_slug/:package_slug",
-  "description": ":package_description",
+  "name": "spiralpackages/maintenance",
+  "description": "This is my package maintenance",
   "keywords": [
-    ":vendor_name",
+    "SpiralPackages",
     "spiral",
-    ":package_slug"
+    "maintenance"
   ],
-  "homepage": "https://github.com/:vendor_slug/:package_slug",
+  "homepage": "https://github.com/spiralpackages/maintenance",
   "license": "MIT",
   "authors": [
     {
-      "name": ":author_name",
-      "email": "author@domain.com",
+      "name": "butschster",
+      "email": "butschster@gmail.com",
       "role": "Developer"
     }
   ],
   "require": {
     "php": "^8.1",
+    "spiral/serializer": "^3.0",
+    "spiral/core": "^3.0",
     "spiral/boot": "^3.0",
     "spiral/console": "^3.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.5",
+    "spiral/framework": "^3.0.x-dev",
     "phpunit/phpunit": "^9.5",
     "spiral/testing": "^2.0",
     "vimeo/psalm": "^4.9"
   },
   "autoload": {
     "psr-4": {
-      "VendorName\\Skeleton\\": "src"
+      "Spiral\\Maintenance\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "VendorName\\Skeleton\\Tests\\App\\": "tests/app",
-      "VendorName\\Skeleton\\Tests\\": "tests/src"
+      "Spiral\\Maintenance\\Tests\\App\\": "tests/app",
+      "Spiral\\Maintenance\\Tests\\": "tests/src"
     }
   },
   "scripts": {
@@ -42,12 +45,15 @@
     "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "spiral/composer-publish-plugin": true
+    }
   },
   "extra": {
     "spiral": {
       "bootloaders": [
-        "VendorName\\Skeleton\\Bootloader\\SkeletonBootloader"
+        "SpiralPackages\\Maintenance\\Bootloader\\MaintenanceBootloader"
       ]
     }
   },
