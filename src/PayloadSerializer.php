@@ -19,7 +19,7 @@ final class PayloadSerializer
 
     public function serialize(Payload $payload): string
     {
-        return $this->serializer->serialize($payload);
+        return (string) $this->serializer->serialize($payload);
     }
 
     public function unserialize(string $payload): Payload
