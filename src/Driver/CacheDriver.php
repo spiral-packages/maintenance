@@ -12,21 +12,23 @@ use Spiral\Maintenance\PayloadSerializer;
 
 final class CacheDriver implements DriverInterface
 {
-    private readonly string $storage;
+    private readonly CacheInterface $cache;
 
     public function __construct(
-        private readonly CacheStorageProviderInterface $storageProvider,
+        CacheStorageProviderInterface $storageProvider,
         private readonly PayloadSerializer $serializer,
         CacheConfig $cacheConfig,
         private readonly string $key,
         ?string $storage = null
     ) {
-        $this->storage = $storage ?: $cacheConfig->getDefaultStorage();
+        $this->cache = $storageProvider->storage(
+            $storage ?? $cacheConfig->getDefaultStorage()
+        );
     }
 
     public function activate(Payload $payload): void
     {
-        $this->getCache()->set(
+        $this->cache->set(
             $this->key,
             $this->serializer->serialize($payload)
         );
@@ -34,22 +36,17 @@ final class CacheDriver implements DriverInterface
 
     public function deactivate(): void
     {
-        $this->getCache()->delete($this->key);
+        $this->cache->delete($this->key);
     }
 
     public function getPayload(): ?Payload
     {
-        if (! $this->getCache()->has($this->key)) {
+        if (! $this->cache->has($this->key)) {
             return null;
         }
 
         return $this->serializer->unserialize(
-            $this->getCache()->get($this->key)
+            $this->cache->get($this->key)
         );
-    }
-
-    private function getCache(): CacheInterface
-    {
-        return $this->storageProvider->storage($this->storage);
     }
 }

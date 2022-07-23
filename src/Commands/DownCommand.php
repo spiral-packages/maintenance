@@ -47,7 +47,7 @@ class DownCommand extends Command
         } catch (\Throwable $e) {
             $this->output->error(
                 \sprintf(
-                    'Failed to enter maintenance mode: %s.',
+                    'Failed to enter maintenance mode: [%s].',
                     $e->getMessage(),
                 )
             );

@@ -13,6 +13,8 @@ class TestCase extends \Spiral\Testing\TestCase
     {
         return [
             \Spiral\Boot\Bootloader\ConfigurationBootloader::class,
+            \Spiral\Cache\Bootloader\CacheBootloader::class,
+            \Spiral\Serializer\Bootloader\SerializerBootloader::class,
             \Spiral\Maintenance\Bootloader\MaintenanceBootloader::class,
             // ...
         ];

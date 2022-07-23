@@ -7,7 +7,6 @@ namespace Spiral\Maintenance;
 use Spiral\Core\FactoryInterface;
 use Spiral\Maintenance\Config\MaintenanceConfig;
 use Spiral\Maintenance\Driver\DriverInterface;
-use Spiral\Maintenance\Exception\DriverNotFoundException;
 
 final class DriverManager
 {

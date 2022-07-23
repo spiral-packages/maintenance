@@ -27,7 +27,7 @@ class UpCommand extends Command
         } catch (\Throwable $e) {
             $this->output->error(
                 \sprintf(
-                    'Failed to disable maintenance mode: %s.',
+                    'Failed to disable maintenance mode: [%s].',
                     $e->getMessage(),
                 )
             );

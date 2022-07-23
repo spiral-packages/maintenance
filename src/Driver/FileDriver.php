@@ -17,7 +17,7 @@ final class FileDriver implements DriverInterface
         private readonly FilesInterface $files,
         string $dir,
     ) {
-        $this->path = $dir.'/'.'maintenance';
+        $this->path = \rtrim($dir, '/').'/'.'maintenance';
     }
 
     public function activate(Payload $payload): void
