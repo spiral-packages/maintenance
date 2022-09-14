@@ -26,7 +26,6 @@
     "spiral/console": "^3.0"
   },
   "require-dev": {
-    "spiral/framework": "^3.0.x-dev",
     "phpunit/phpunit": "^9.5",
     "spiral/testing": "^2.0",
     "vimeo/psalm": "^4.9"
