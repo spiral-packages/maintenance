@@ -11,7 +11,7 @@ final class MaintenanceConfig extends InjectableConfig
 {
     public const CONFIG = 'maintenance';
     protected array $config = [
-        'default' => '',
+        'default' => null,
         'drivers' => [],
     ];
 
